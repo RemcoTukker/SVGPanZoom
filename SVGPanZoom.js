@@ -9,7 +9,7 @@
     // inspired by SVGPan ( https://code.google.com/p/svgpan/ ) by Andrea Leofreddi
     // (also see http://www.cyberz.org/blog/2009/12/08/svgpan-a-javascript-svg-panzoomdrag-library/)
     // and http://www.petercollingridge.co.uk/interactive-svg-components/pan-and-zoom-control
-
+    console.log("SGVPanZoom script loaded");
     /* alt matrix transform getting/setting (does it work in other browsers?) elem.transform.baseVal.getItem(0).setMatrix(matrix);
         // Getting
         var xforms = myElement.transform.baseVal; // An SVGTransformList
