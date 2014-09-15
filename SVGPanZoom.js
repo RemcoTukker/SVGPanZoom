@@ -6,33 +6,35 @@
     //   If going to IE10+ and Android 4.4+, we could maybe improve responsiveness by using requestAnimationFrame 
     //       TODO: use requestAnimationFrame if it is available
     //
+    //       TODO: test on multiple browsers, then try to improve with getting/setting code below and test on multiple browsers again
+    //
     // inspired by SVGPan ( https://code.google.com/p/svgpan/ ) by Andrea Leofreddi
     // (also see http://www.cyberz.org/blog/2009/12/08/svgpan-a-javascript-svg-panzoomdrag-library/)
     // and http://www.petercollingridge.co.uk/interactive-svg-components/pan-and-zoom-control
-    console.log("SGVPanZoom script loaded");
-    /* alt matrix transform getting/setting (does it work in other browsers?) elem.transform.baseVal.getItem(0).setMatrix(matrix);
+    // alt matrix transform getting/setting (does it work in other browsers?) elem.transform.baseVal.getItem(0).setMatrix(matrix);
         // Getting
-        var xforms = myElement.transform.baseVal; // An SVGTransformList
-        var firstXForm = xforms.getItem(0);       // An SVGTransform
-        if (firstXForm.type == SVGTransform.SVG_TRANSFORM_TRANSLATE){
-          var firstX = firstXForm.matrix.e,
-              firstY = firstXForm.matrix.f;
-        }
-
+    //    var xforms = myElement.transform.baseVal; // An SVGTransformList
+    //    var firstXForm = xforms.getItem(0);       // An SVGTransform
+    //    if (firstXForm.type == SVGTransform.SVG_TRANSFORM_TRANSLATE){
+    //      var firstX = firstXForm.matrix.e,
+    //          firstY = firstXForm.matrix.f;
+    //    }
         // Setting
-        myElement.transform.baseVal.getItem(0).setTranslate(30,100);
-    */
-
+    //    myElement.transform.baseVal.getItem(0).setTranslate(30,100);
+    //
     // the main svg container and the group that we want to pan/zoom
     // define as follows:
-    // <svg blablabla id="svggraph" >
-    // <g id="svgpanzoom" transform="matrix(a,b,c,d,e,f)" >  with a and d scale and e and f translation 
-    var svggraph = document.getElementById("svggraph");
-    var svgpanzoom = svggraph.getElementById("svgpanzoom");    
+    // &lt;svg blablabla id="svggraph" &gt;
+    // &lt;g id="svgpanzoom" transform="matrix(a,b,c,d,e,f)" &gt;  with a and d scale and e and f translation 
+    console.log("panzoom loaded")
+
+    var svggraph = document.getElementById("svgtiger");
+    var svgpanzoom = svggraph.getElementById("tigerpanzoom");    
 
     // config
-    var zoomSensitivity = 1;   // speed of zooming
+    var zoomSensitivity = 5;   // speed of zooming
     var ignoreMouseOut = true; // ignore mouse out or handle it as a mouseup event
+      // TODO see why mouseout events are being generated when not really going out and how to fix that
     
     // the currently used transformation (note that getCTM gives us a wrong result due to autoscaling of image)
     var tfstring = svgpanzoom.getAttribute("transform");
@@ -77,7 +79,7 @@
       mousePressed = true;
       lastX = evt.clientX;
       lastY = evt.clientY;
-      //return false; //sort of prevents browser from dragging elements TODO: check this!
+      //return false; // prevents browser from dragging elements in some situations
     }
 
     function mouseUp(evt) {
@@ -93,20 +95,18 @@
 
       lastX = evt.clientX;
       lastY = evt.clientY;
+   
       return false;
     }
 
-    // TODO: what would be really cool is to do smooth zooming by setting a target and add a series of timeout to reach it 
-    //                                                                                (or maybe even some css effect?)
-    //  Note: I would have liked SMIL animation for smooth zooming, but svg animateTransform only works with separate scale and translate transforms
-    //        instead of with a transform matrix. Was becoming a bit too hairy for me..
     function wheel(evt) {
-      // TODO: test for large differences in deltaY between browsers..
       var pt = screenToPanZoomCoords(evt.clientX, evt.clientY); // find out location in panzoom coordinates
-      var z = (1 + evt.deltaY / 100) * zoomSensitivity;         // calculate how much we want to scale
-
-      //zoom(pt.x, pt.y, z);                                      // and then zoom in
-      smoothZoom(pt.x, pt.y, z);                                      // and then zoom in
+      var z = 1 + (0.01 * evt.deltaY / Math.abs(evt.deltaY)) * zoomSensitivity;         // calculate how much we want to scale
+                                      // the Math.abs is to deal with some nasty browser differences in deltaY differences
+      
+      zoom(pt.x, pt.y, z);                                      // and then zoom in
+      
+      evt.preventDefault();
       return false; 
     }
 
@@ -119,3 +119,6 @@
     // the "wheel" event is rather new, but if it doesnt work due to old browser, too bad, not important..
     // TODO: does this work in mobile browser when pinching though? I do want _that_
     svggraph.addEventListener('wheel', function(evt){ return wheel(evt) });
+
+    svgpanzoom.addEventListener('dragstart', function(evt) {evt.preventDefault(); }); // no dragging away svg elements please
+    
