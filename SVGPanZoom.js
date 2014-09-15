@@ -3,14 +3,7 @@
     //
     // It is intended to work on modern browsers (Firefox, Chrome, IE9+, Android Browser 4+)
     //
-    //   If going to IE10+ and Android 4.4+, we could maybe improve responsiveness by using requestAnimationFrame 
-    //       TODO: use requestAnimationFrame if it is available
     //
-    //       TODO: test on multiple browsers, then try to improve with getting/setting code below and test on multiple browsers again
-    //
-    // inspired by SVGPan ( https://code.google.com/p/svgpan/ ) by Andrea Leofreddi
-    // (also see http://www.cyberz.org/blog/2009/12/08/svgpan-a-javascript-svg-panzoomdrag-library/)
-    // and http://www.petercollingridge.co.uk/interactive-svg-components/pan-and-zoom-control
     // alt matrix transform getting/setting (does it work in other browsers?) elem.transform.baseVal.getItem(0).setMatrix(matrix);
         // Getting
     //    var xforms = myElement.transform.baseVal; // An SVGTransformList
