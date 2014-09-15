@@ -1,7 +1,13 @@
 SVGPanZoom V0.9
 ==========
 
-Sweet, short and simple stand-alone SVG Pan Zoom code including support for autoscaled SVGs and touch events. Apache V2 license. Should work on: IE9+, FF, Chrome, Android 4+, ...? 
+Sweet, short and simple stand-alone SVG Pan Zoom code including support for autoscaled SVGs and touch events. Apache V2 license. 
+
+Should work on: FF, Chrome, Chrome mobile, Android 4+, ...? 
+
+Tests (so far only inline svg followed by inline javascript):
+Working on: Opera Mobile, FF, Chrome, Chrome mobile
+To be tested on: Opera mini (doesnt support inline SVG), Apple stuff
 
 This code is inspired on [SVGPan](https://code.google.com/p/svgpan/) by Andrea Leofreddi (also see [his blogpost](http://www.cyberz.org/blog/2009/12/08/svgpan-a-javascript-svg-panzoomdrag-library/)) and [code by Peter Collingridge](http://www.petercollingridge.co.uk/interactive-svg-components/pan-and-zoom-control). Their code is starting to get old, however, due to sketchy and sometimes quickly changing SVG browser implementations. Also, I needed support for autoscaled SVGs. 
 
@@ -16,17 +22,20 @@ Demo can be found at [my personal github page](http://remcotukker.github.io/SVGP
 
 ## V1.0
 
-* Better setting/getting of SVG transform matrix
+* Clean up code a lil bit
+* Fix issue mouseout events
 * Make it a proper module with easy initialization of the IDs you want to use (and other config)
 * Touch up docu
-* Add touch events
-* Testing on browsers (so far, Chrome (incl mobile), FF, IE11 seem to work), both inline and in separate SVG
+* Testing on browsers, both inline and in separate SVG, fix any incompatibility issues for main browsers
 
 ## V1.1
 
 * Use requestAnimationFrame when it is available
-* Add a unity matrix to the panzoom group if no matrix is defined yet
+* Add a minified version and/or a data-uri version
+* Add rotation, in particular attractive for mobile use
 
 ## V2.0
 
+* Drop IE support and allow ourselves to directly manipulate the transforms instead of relying on string parsing / concatenation
 * Allow for inertia-based pan/zooming (in particular for smooth zooming :-)
+* Test Apple browsers
