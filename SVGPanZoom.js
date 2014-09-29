@@ -6,8 +6,8 @@ var addPanZoomToSVG = function(config) {
     /* ===== take care of config =====                                             */
 
     var defaultConfig = {
-        svgID: svg,             // ID of the svg element that should catch mouse clicks and touches
-        panzoomID: panzoom,     // ID of the element that should be panzoomed
+        svgID: "svg",           // ID of the svg element that should catch mouse clicks and touches
+        panzoomID: "panzoom",   // ID of the element that should be panzoomed
         scrollSpeed: 5,         // Speed of scroll zooming
         pinchSpeed: 1,          // Speed of pinch zooming (5 times smaller than scrollSpeed is an ok choice)
         upOnMouseOut: false     // treat mouse leaving svg area as a mouseup event
