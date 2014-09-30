@@ -17,7 +17,7 @@ How to use:
  * After the code is loaded, use addPanZoomToSVG({svgID: ..., panzoomID: ...,scrollSpeed: ..., pinchSpeed: ..., upOnMouseOut: ...}). All config is optional, default svgID and panzoomID are "svg" and "panzoom". 
  * Make sure the svgID and panzoomID options are matching the ID tags in your svg elements. For svgID your svg tag is recommended, since it is used to attach the events to, and for the panzoomID a g tag can be used for example.
 
-Demo can be found at [my personal github page](http://remcotukker.github.io/SVGPanZoom/)
+Demo can be found at [my personal page](http://www.remcotukker.com/SVGPanZoom/)
 
 ## Roadmap
 
